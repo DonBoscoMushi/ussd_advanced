@@ -83,7 +83,15 @@ class _MyAppState extends State<MyApp> {
                     setState(() {
                       _response = _res;
                     });
-                    String? _res2 = await UssdAdvanced.sendMessage('0');
+                    await UssdAdvanced.sendMessage('1');
+
+                    await UssdAdvanced.sendMessage('1'); // enter phone
+
+                    await UssdAdvanced.sendMessage('0754562483'); //phone
+
+                    await UssdAdvanced.sendMessage('5600'); //amount
+
+                    String? _res2 = await UssdAdvanced.sendMessage('0701'); // pin
                     setState(() {
                       _response = _res2;
                     });
