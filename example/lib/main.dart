@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
                 ElevatedButton(
                   onPressed: () async {
                     String? _res = await UssdAdvanced.multisessionUssd(
-                        code: _controller.text, subscriptionId: 1);
+                        code: _controller.text, subscriptionId: 0);
                     setState(() {
                       _response = _res;
                     });
