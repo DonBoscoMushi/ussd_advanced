@@ -99,16 +99,29 @@ class UssdAdvanced {
 class _CodeAndBody {
   _CodeAndBody(this.code, this.messages);
   _CodeAndBody.fromUssdCode(String _code) {
-    var _removeCode = _code.substring(1, _code.length - 1);
-    // var _removeCode = _code.split('#')[0];
-    var items = _removeCode.split("*").toList();
+    //Find the first '#' position
+    int hashIndex = _code.indexOf('#');
 
-    // code = '*${items[1]}#';
-    code = '${_code[0]}${items[0]}#';
+    if (hashIndex == -1) {
+      throw Exception("Invalid USSD code format");
+    }
 
-    if (items.length > 1) {
-      // messages = items.sublist(2);
-      messages = items.sublist(1);
+    //Split the code part (including '#')
+    code = _code.substring(0, hashIndex + 1);
+
+    //Extract the remaining part after the first '#'
+    String remaining = _code.substring(hashIndex + 1);
+
+    if (remaining.endsWith('#')) {
+      //If the remaining part ends with '#', remove it
+      remaining = remaining.substring(0, remaining.length - 1);
+    }
+
+    //If there is something after the first '#', split it by '*'
+    if (remaining.isNotEmpty) {
+      messages = remaining.split('*');
+    } else {
+      messages = [];
     }
   }
   late String code;
