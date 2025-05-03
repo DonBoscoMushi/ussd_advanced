@@ -66,7 +66,8 @@ class UssdAdvanced {
   static Future<String?> sendMultipleMessages(List<String> messages) async {
     var _response = "";
     for (var m in messages) {
-      var _res = await sendMessage(m);
+      // var _res = await sendMessage(m);
+      var _res = sendAdvancedUssd(code: m, subscriptionId: 0);
       _response += "\n$_res";
     }
 
